@@ -12,3 +12,4 @@ TIC2601 Online Marketplace Application
 7. A package.json should be created. Assuming that MySQL has been installed successfully, type `npm install mysql`.
 8. Install ExpressJS by typing `npm install express`. ExpressJS is the framework that we might be using for backend.
 9. Add project into Atom, go to command line and type `node app.js` to start server.
+10. When there are changes to be made, just commit it in the Git window in Atom.
