@@ -1,0 +1,270 @@
+/* Overall Impact */
+body {
+    margin:0;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Main Page */
+#header {
+    background-color: rgba(220,220,220,0.3);
+    padding:10px;
+}
+
+#header #title {
+    margin-left:25px;
+    margin-top:3px;
+    font-size: 20px;
+}
+
+#header #title span {
+    color: rgba(105,105,105,0.6);
+}
+
+#header #menu button {
+    margin-left: 15px;
+    text-transform: none;
+    border-color: black;
+    padding-left:30px; 
+    padding-right:30px;
+}
+
+#filter button {
+    text-transform: none;
+    padding-left:30px; 
+    padding-right:30px;
+    border-color: black;
+}
+
+#content {
+    margin-left:35px;
+}
+
+/* Logged In */
+#header #user {
+    display: flex;
+    margin-left: 150px;
+}
+
+#header #user span {
+    padding-top: 5px;
+}
+
+#header #user #background {
+    border-radius: 20px;
+    background-color: lightgray;
+    width:30px;
+    height:30px;
+    margin-left:10px;
+}
+
+#profileDetails {
+    padding-top: 30px;
+    padding-left: 30px;
+    overflow: hidden;
+}
+
+#profileDetails #background {
+    border-radius: 50px;
+    background-color: lightgray;
+    width:120px;
+    height:120px;
+    margin-left:10px;
+}
+
+#profileDetails #information {
+    padding-left: 10px;
+}
+
+#profileDetails #information h3 {
+    margin-bottom: 0;
+}
+
+#profileDetails #privateInformation {
+    padding-top: 20px;
+}
+
+#profileDetails #privateInformation h3 {
+    font-family: monospace;
+    font-size: large;
+}
+
+#profileDetails #privateInformation div {
+    padding-left: 15px;
+}
+
+#profileDetails #listingInsights h5 {
+    font-family: monospace;
+    font-size: large;
+}
+
+#profileDetails #listingInsights span {
+    font-size: 40px;
+    font-family: monospace;
+    font-weight: bolder;
+}
+
+#yourListings {
+    margin-left: 20px;
+}
+
+#yourListings h3 {
+    font-family: monospace;
+    font-size: large;
+}
+
+#yourListings #seeMore button {
+    margin-left: 50%;
+}
+
+
+/* Comment */
+#comments #heading {
+    font-family: monospace;
+    font-size: large;
+    margin-left: 35px;
+}
+
+#comments #productComments {
+    background-color: lightgray;
+}
+
+#comments #productComments:nth-child(odd) {
+    background-color: rgba(105,105,105,0.7);
+}
+
+#comments #productComments #icon {
+    border-radius: 50px;
+    background-color: darkgray;
+    width:20px;
+    height:20px;
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+#comments #productComments img {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width:120px;
+    height:120px;
+    margin-left: -50px;
+}
+
+#comments #productComments h3 {
+    font-family: monospace;
+    font-size: large;
+}
+
+#comments #productComments button {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+/* Bookmarks */
+#bookmarks {
+    margin-left:35px;
+}
+
+#bookmarks h3 {
+    font-family: monospace;
+    font-size: large;
+}
+
+/* Offer */
+#offers #heading {
+    font-family: monospace;
+    font-size: large;
+    margin-left: 35px;
+}
+
+#offers #productOffers #productOffersDetails {
+    background-color: lightgray;
+}
+
+#offers #productOffers #productOffersDetails:nth-child(odd) {
+    background-color: rgba(105,105,105,0.1);
+}
+
+#offers #productOffers #productOffersDetails #icon {
+    border-radius: 50px;
+    background-color: darkgray;
+    width:20px;
+    height:20px;
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+#offers #productOffers #productOffersDetails img {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width:120px;
+    height:120px;
+    margin-left: -50px;
+}
+
+#offers #productOffers #productOffersDetails h3 {
+    font-family: monospace;
+    font-size: large;
+}
+
+#offers #productOffers #productOffersDetails h2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#offers #productOffers #productOffersDetails button {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+#offers #productOffers #productOffersToggle {
+    font-family: monospace;
+    padding-left:30px;
+    background-color: rgba(105,105,105,0.5);
+    max-height:30px
+}
+
+#offers #productOffers #productOffersToggle h3 {
+    margin-left: -90px;
+    margin-top: 5px;
+    font-family: monospace;
+    font-size: large;    
+}
+
+#offers #productOffers #productOffersToggle svg {
+    font-size: 2em;
+    margin-top: 2px;
+}
+
+/* Product Details */
+#details #right {
+    background-color: lightgray;
+    margin-left: -230px;
+    height: 100%;
+    padding-left: 100px;
+}
+
+#details #logo {
+    border-radius: 50px;
+    background-color: darkgray;
+    width:50px;
+    height:50px;
+    margin-left:10px;
+}
+
+#details #right h3 {
+    font-family: monospace;
+    font-size: 40px
+}
+
+#details #right #sellerInfo {
+    padding-top:30px;
+}
+
+#details #right h5 {
+    font-size: 20px;
+}
+
+#details #right #productInfo svg {
+    width: 60px;
+    height: 100px;
+    padding-left: 200px;
+}
