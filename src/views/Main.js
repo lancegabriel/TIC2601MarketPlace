@@ -80,6 +80,7 @@ const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, sig
         products.data = filteredProducts;
         setProducts(previousProducts)
     }
+
     const modalBody = () => {
         return <Paper square>
             <Tabs
@@ -122,16 +123,7 @@ const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, sig
                 showUser={false}
             />
             <br />
-            <div id="content">
-                {Array.isArray(products.data) && <Filter handleStateChanged={handleStateChanged} />}
-                <Grid container style={{ marginTop: 20 }}>
-                    {products?.data && products.data.map((product, index) => (
-                        <Grid item xs={2} key={index} style={{ paddingBottom: 50 }} >
-                            <CardComponent product={product} dontShowDetails={true} />
-                        </Grid>))}
 
-                </Grid>
-            </div>
         </>)
 }
 

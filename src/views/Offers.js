@@ -8,14 +8,13 @@ const Offers = ({ logins, userOffers, userProducts }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getUserOffers(logins?.data.token, logins?.data.data[0]?.accID))
-    }, [logins, dispatch])
+        dispatch(getUserOffers(logins?.data.token, logins?.data.data[0]?.accID))}, [logins, dispatch])
     return (
         <>
 
             <Header modal={() => { }} showButton={false} showUser={true} userInformations={logins?.data} />
             <div id="offers">
-                <h3 id="heading">This is all your offers:</h3>
+                <h3 id="heading">This are your offers:</h3>
                 {
                     Array.isArray(userOffers.data) ? userOffers.data.map((offer, index) => {
                         let productwithOffers = {

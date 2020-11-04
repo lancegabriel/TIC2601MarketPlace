@@ -15,19 +15,19 @@ const ProductDetails = ({ logins, getProductDetails, productDetails, getProductC
     const history = useHistory();
     useEffect(() => {
         const productId = history.location.state.product.productID;
-        getProductDetails(logins?.data.token, productId);
+        getProductDetails(logins?.data.token,  productId);
         getProductComments(logins?.data.token, productId);
     }, [history, getProductDetails, getProductComments])
     return (
         <>
             <Header modal={() => { }} showButton={false} showUser={logins} userInformations={logins?.data} />
             <br />
-            <span style={{ fontSize: 15, marginLeft: 30 }} onClick={() => history.push("/")}>Back To Lising Page</span>
+            <span style={{ fontSize: 15, marginLeft: 30 }} onClick={() => history.push("/")}>Back To Listing Page</span>
             <br />
             <div id="details">
                 <Grid container>
                     <Grid item xs={6}>
-                        <img src={productDetails.data[0].image ? productDetails.data[0].image : ProductImage} alt="Product" width="70%" height="100%" />
+                        <img src={productDetails.data[0].image == true ? productDetails.data[0].image : ProductImage} alt="Product" width="70%" height="100%" />
                     </Grid>
                     <Grid item xs={6}>
                         <div id="right">
@@ -37,13 +37,15 @@ const ProductDetails = ({ logins, getProductDetails, productDetails, getProductC
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Grid id="sellerInfo" container>
+                                    <Grid item xs={2}>
+                                        <div id="logo"></div>
+                                    </Grid>
                                         <Grid item xs={4}>
+                                            <p><b>Seller Information:</b></p>
                                             <p>{productDetails.data[0].sellerID}</p>
                                             <p>95% Positive Review</p>
                                         </Grid>
-                                        <Grid item xs={6}>
-                                            <div id="logo"></div>
-                                        </Grid>
+
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -51,22 +53,25 @@ const ProductDetails = ({ logins, getProductDetails, productDetails, getProductC
                                         <Grid item xs={11}>
                                             <h5>{productDetails.data[0].ProductName}</h5>
                                         </Grid>
-                                        <Grid item xs={1}>
-                                            <Bookmarks />
-                                        </Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <p>{productDetails.data[0].categoryID}</p>
+                                <b>Category:</b> <p>{productDetails.data[0].categoryID}</p>
                                 </Grid>
+                                <Grid>
+                                <b>Product Details:</b>
                                 <p>{productDetails.data[0].productDescription}</p>
+                                </Grid>
                                 <Grid item xs={12}>
                                     <Grid container>
-                                        <Grid item xs={7}>
+                                        <Grid item xs={2}>
                                             <Button size="small" variant="contained" style={{ backgroundColor: "black", color: "white" }}>Post A Comment</Button>
                                         </Grid>
-                                        <Grid item xs={4}>
+                                        <Grid item xs={2}>
                                             <Button size="small" variant="contained" style={{ backgroundColor: "black", color: "white" }}>Make An Offer</Button>
+                                        </Grid>
+                                        <Grid item xs={1}>
+                                          <Bookmarks /> 
                                         </Grid>
                                     </Grid>
                                 </Grid>

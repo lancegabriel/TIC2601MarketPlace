@@ -7,7 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import { getUserBookmarks } from "../actions/userBookmarks";
 
 const Bookmarks = ({ logins, userBookmarks, userProducts, getUserBookmarks }) => {
-
     useEffect(() => {
         getUserBookmarks(logins?.data.token, logins?.data.data[0]?.accID)
     }, [logins,getUserBookmarks])

@@ -12,10 +12,10 @@ const Comments = ({ logins, userComments, userProducts }) => {
     }, [logins, dispatch])
     return (
         <>
-
             <Header modal={() => { }} showButton={false} showUser={true} userInformations={logins?.data} />
+
             <div id="comments">
-                <h3 id="heading">This is all your comments:</h3>
+                <h3 id="heading">This are all your comments:</h3>
                 {
                     Array.isArray(userComments.data) ? userComments.data.map((comment, index) => {
                         Array.isArray(userProducts.data) && userProducts.data.filter((product) => { if (product.productID === comment.productID) { comment.productID = product } return false });

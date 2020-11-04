@@ -12,6 +12,7 @@ import Comments from "./views/Comments";
 import Bookmarks from "./views/Bookmarks";
 import Offers from "./views/Offers";
 import ProductDetails from "./views/ProductDetails";
+import CreateListing from "./views/CreateListing";
 import history from "./history";
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -42,6 +43,9 @@ function App() {
             </Route>
             <Route exact path="/details">
               <ProductDetails />
+            </Route>
+            <Route exact path="/createListing">
+              <CreateListing />
             </Route>
           </Switch>
         </Router>

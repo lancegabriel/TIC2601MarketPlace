@@ -28,7 +28,7 @@ function CardComponent({ product, bookmark, dontShowDetails }) {
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={product.image ? product.image : ProductImage}
+                    image={product.image == true ? product.image : ProductImage}
                     title="Product"
                 />
                 <CardContent>
@@ -46,9 +46,7 @@ function CardComponent({ product, bookmark, dontShowDetails }) {
             <CardActions>
                 {
                     !dontShowDetails && <span style={{ fontSize: 10, marginLeft: 10 }} onClick={() => {
-                        history.push("/details", {
-                            product
-                        })
+                        history.push("/details", {product})
                     }}>
                         View More >
                     </span>
