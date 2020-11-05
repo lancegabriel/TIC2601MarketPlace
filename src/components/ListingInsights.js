@@ -11,16 +11,16 @@ const ListingInsights = () => {
             <h5>LISTING INSIGHTS:</h5>
             <Grid container spacing={3}>
                 <Grid onClick={() => history.push("/comments")} item xs={5} style={{ backgroundColor: "lightgray", marginRight: 190, marginBottom: 30, padding: 50, textAlign: "center" }}>
-                    <span>Comments</span>
+                    <span>COMMENTS</span>
                 </Grid>
                 <Grid onClick={() => history.push("/offersGiven")} item xs={5} style={{ backgroundColor: "lightgray", marginBottom: 30, padding: 50, textAlign: "center" }}>
-                    <span>Offer Given</span>
+                    <span>OFFER GIVEN</span>
                 </Grid>
                 <Grid onClick={() => history.push("/offersRecieved")} item xs={5} style={{ backgroundColor: "lightgray", marginRight: 190, marginBottom: 30, padding: 50, textAlign: "center" }}>
-                    <span>Offer Received</span>
+                    <span>OFFER RECEIVED</span>
                 </Grid>
                 <Grid onClick={() => history.push("/bookmarks")} item xs={5} style={{ backgroundColor: "lightgray", marginBottom: 30, padding: 50, textAlign: "center" }}>
-                    <span>Bookmarks</span>
+                    <span>BOOKMARKS</span>
                 </Grid>
             </Grid>
         </div>

@@ -12,10 +12,10 @@ import Input from '@material-ui/core/Input';
 import Button from "@material-ui/core/Button";
 import { setLogin } from "../actions/logins";
 import { setSignup } from "../actions/signups";
-import { useHistory } from "react-router"
+import { useHistory } from "react-router";
 import { signout } from "../actions/signout";
 
-const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, signups }) => {
+const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, signups, showUser}) => {
     const dispatch = useDispatch();
     const [value, setValue] = React.useState(0);
     const [getProduct, setProducts] = React.useState(products.data);
@@ -25,10 +25,10 @@ const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, sig
     };
 
     React.useEffect(() => {
-        if (logins.data.success) {
-            history.push("/loggedIn")
+        if (logins && logins.data && logins.data.success) {
+            history.push("/mainloggedin")
         }
-        else if (logins.data.data === "Not Login") {
+        else if (logins && logins.data && logins.data.data && logins.data.data === "Not Login") {
             alert("Unable To Login")
             dispatch(signout)
         }
@@ -55,11 +55,17 @@ const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, sig
         const signupPassword = document.getElementById("signupPassword").value;
         const signupName = document.getElementById("signupName").value;
         const signupAddress = document.getElementById("signupAddress").value;
+        const signupEmail = document.getElementById("signupEmail").value;
+        const signupGender = document.getElementById("signupGender").value;
+        const signupbDate = document.getElementById("signupbDate").value;
         const body = {
             username: signupUsername,
             PASSWORD: signupPassword,
             NAME: signupName,
-            addr: signupAddress
+            addr: signupAddress,
+            email: signupEmail,
+            gender: signupGender,
+            bdate: signupbDate
         }
         await setSignup(body);
         if (signups.data === "Not Signup") {
@@ -78,7 +84,7 @@ const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, sig
             }
         })
         products.data = filteredProducts;
-        setProducts(previousProducts)
+        setProducts(previousProducts);
     }
 
     const modalBody = () => {
@@ -106,7 +112,10 @@ const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, sig
                     <Input id="signupUsername" placeholder="Username" fullWidth />
                     <Input id="signupPassword" type="password" placeholder="Password" fullWidth />
                     <Input id="signupAddress" placeholder="Address" fullWidth />
-                    <Button variant="outlined" onClick={handleSignup}>Signup</Button>
+                    <Input id="signupEmail" placeholder="Email" fullWidth />
+                    <Input id="signupGender" placeholder="Gender" fullWidth />
+                    <Input type="date" id="signupbDate" placeholder="Birthday" fullWidth />
+                  <Button variant="outlined" onClick={handleSignup}>Signup</Button>
                 </form>
             </TabPanel>
         </Paper>
@@ -114,19 +123,48 @@ const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, sig
     useEffect(() => {
         dispatch(getProducts)
     }, [getProducts, dispatch])
+    if (logins.data === true) {
     return (
         <>
-            <Header modal={
+            <Header modal= {
                 modalBody
             }
-                showButton={true}
-                showUser={false}
+                showButton={false}
+                showUser={true}
             />
             <br />
-
+            <div id="content">
+                {Array.isArray(products.data) && <Filter handleStateChanged={handleStateChanged} />}
+                <Grid container style={{ marginTop: 20 }}>
+                    {Array.isArray(products.data) && products.data.map((product, index) => (
+                        <Grid item xs={2} key={index} style={{ paddingBottom: 50 }} >
+                            <CardComponent product={product} dontShowDetails={false} />
+                        </Grid>))}
+                </Grid>
+            </div>
         </>)
+} else {
+  return (
+      <>
+          <Header modal= {
+              modalBody
+          }
+              showButton={true}
+              showUser={false}
+          />
+          <br />
+          <div id="content">
+              {Array.isArray(products.data) && <Filter handleStateChanged={handleStateChanged} />}
+              <Grid container style={{ marginTop: 20 }}>
+                  {Array.isArray(products.data) && products.data.map((product, index) => (
+                      <Grid item xs={2} key={index} style={{ paddingBottom: 50 }} >
+                          <CardComponent product={product} dontShowDetails={false} />
+                      </Grid>))}
+              </Grid>
+          </div>
+      </>)
 }
-
+}
 const mapStateToProps = state => ({
     products: state.products,
     logins: state.logins,

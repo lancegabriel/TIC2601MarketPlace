@@ -110,7 +110,7 @@ router.get('/product', function (req, res, next) {
   );
 });
 
-// Get Categories 
+// Get Categories
 router.get('/category', function (req, res, next) {
   db.query(
     'SELECT * from Categories',
@@ -129,4 +129,57 @@ router.get('/category', function (req, res, next) {
 });
 
 
+// Admin get num of prod sold per seller
+router.get("/admin/getNumOfProdSold", function (req, res, next) {
+  db.query(
+      `SELECT accID, name, COUNT(productID) AS countProducts FROM ACCOUNT a, Product p WHERE STATUS = "sold" AND a.accID = p.sellerID GROUP by accID ORDER BY COUNT(productID) DESC`,
+      (err, doc) => {
+          if (err) throw err;
+          else if (doc.length) res.send({
+              data: doc,
+              success: true
+          });
+          else res.send({
+              data: "Bookmarks Not Found",
+              success: false
+          });
+      }
+  );
+});
+
+// List the categories with highest transaction value in descending order
+router.get("/admin/getNumOfProdSold", function (req, res, next) {
+  db.query(
+      `SELECT categoryName, SUM(unitPrice) AS sumUnitPrice FROM Categories c, Product p WHERE c.categoryID = p.categoryID AND status = "sold" GROUP BY categoryName ORDER BY SUM(unitPrice) DESC`,
+      (err, doc) => {
+          if (err) throw err;
+          else if (doc.length) res.send({
+              data: doc,
+              success: true
+          });
+          else res.send({
+              data: "Bookmarks Not Found",
+              success: false
+          });
+      }
+  );
+});
+
+// Check offer range of products in categories
+router.get("/admin/getRangeOfProds", function (req, res, next) {
+  db.query(
+      `SELECT categoryName, MIN(priceOffered) AS minPriceOffered, MAX(priceOffered) AS maxPriceOffered FROM Categories c, Offer o, Product p WHERE o.productID = p.productID GROUP BY categoryName`,
+      (err, doc) => {
+          if (err) throw err;
+          else if (doc.length) res.send({
+              data: doc,
+              success: true
+          });
+          else res.send({
+              data: "Bookmarks Not Found",
+              success: false
+          });
+      }
+  );
+});
 module.exports = router;

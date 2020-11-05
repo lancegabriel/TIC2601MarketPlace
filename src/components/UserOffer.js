@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -7,6 +7,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const Offer = ({ product }) => {
+    console.log(product);
     const [counter, setCounter] = useState(0);
     const [display, setDisplay] = useState("block");
     const handleChange = () => {
@@ -19,6 +20,7 @@ const Offer = ({ product }) => {
             setCounter(0);
         }
     }
+
     return (
         <>
             <br />

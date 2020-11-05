@@ -12,9 +12,9 @@ import { connect, useDispatch } from 'react-redux';
 const Filter = ({ getCategories, categories, handleStateChanged,  products }) => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
-
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
+
     };
 
     const handleClose = (event) => {
@@ -24,7 +24,6 @@ const Filter = ({ getCategories, categories, handleStateChanged,  products }) =>
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
         }
-
         setOpen(false);
     };
 

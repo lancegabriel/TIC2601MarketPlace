@@ -23,7 +23,13 @@ const Header = ({ modal, showButton, showUser, userInformations, signout, showSe
         dispatch(signout)
         history.push("/")
     }
+    const handleToProfile = () => {
+        history.push("/loggedIn")
+    }
 
+    const handleCreate = () => {
+        history.push("/createlisting")
+    }
     return (
         <div id="header">
             <Grid container>
@@ -33,6 +39,7 @@ const Header = ({ modal, showButton, showUser, userInformations, signout, showSe
                         <span> MARKETPLACE</span>
                     </div>
                 </Grid>
+                 <Grid item xs={2}>
                 <Modal modal={
                     modal
                 }
@@ -57,23 +64,26 @@ const Header = ({ modal, showButton, showUser, userInformations, signout, showSe
                 }
                 {
                     showUser && (
-                        <div id="user">
+                        <div id="user" style={{float: 'right'}}>
+                          <div id="background" onClick={handleToProfile}>
+                              <span></span>
+                              </div>
                             <span>
                                 {userInformations?.data[0]?.username}
                             </span>
-                            <div id="background" onClick={handleLogout}>
-                                <span></span>
-                            </div>
+                            &nbsp;&nbsp;&nbsp;<Button size="small" variant="contained" color="secondary" onClick={handleCreate}>List</Button>
+                          &nbsp;&nbsp;&nbsp;<Button size="small" variant="outlined" onClick={handleLogout}>Logout</Button>
                         </div>
                     )
                 }
+                </Grid>
             </Grid>
         </div>
     )
 }
 
 const mapStateToProps = state => ({
-    logins: state.signouts
+    logins: state.logins
 })
 
 

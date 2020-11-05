@@ -23,12 +23,13 @@ const useStyles = makeStyles({
 function CardComponent({ product, bookmark, dontShowDetails }) {
     const history = useHistory();
     const classes = useStyles();
+    console.log(product.image)
     return (
         <Card className={classes.root}>
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={product.image == true ? product.image : ProductImage}
+                    image={product.image ? product.image : ProductImage}
                     title="Product"
                 />
                 <CardContent>
@@ -46,7 +47,9 @@ function CardComponent({ product, bookmark, dontShowDetails }) {
             <CardActions>
                 {
                     !dontShowDetails && <span style={{ fontSize: 10, marginLeft: 10 }} onClick={() => {
-                        history.push("/details", {product})
+                        history.push("/details", {
+                            product
+                        })
                     }}>
                         View More >
                     </span>

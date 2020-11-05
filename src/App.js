@@ -13,9 +13,10 @@ import Bookmarks from "./views/Bookmarks";
 import Offers from "./views/Offers";
 import ProductDetails from "./views/ProductDetails";
 import CreateListing from "./views/CreateListing";
+import MainLoggedIn from "./views/MainLoggedIn";
 import history from "./history";
 import { PersistGate } from 'redux-persist/integration/react'
-
+import Admin from "./views/Admin";
 
 function App() {
   return (
@@ -44,8 +45,14 @@ function App() {
             <Route exact path="/details">
               <ProductDetails />
             </Route>
-            <Route exact path="/createListing">
+            <Route exact path="/createlisting">
               <CreateListing />
+            </Route>
+            <Route exact path="/mainloggedin">
+              <MainLoggedIn />
+            </Route>
+            <Route path="/admin">
+              <Admin />
             </Route>
           </Switch>
         </Router>

@@ -5,9 +5,8 @@ const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
 // Insert a product
-router.post('/product', upload.single('image'), function (req, res, next) {
+router.post('/product', function (req, res, next) {
     let product = req.body;
-    product.image = req.file.path;
     db.query(
         'INSERT INTO Product SET ? ', product,
         (err, rows) => {
@@ -16,7 +15,7 @@ router.post('/product', upload.single('image'), function (req, res, next) {
                 success: true
             });
             else res.send({
-                data: "Product Not Set",
+                data: "Product Not Created",
                 success: false
             });
         }
@@ -106,7 +105,7 @@ router.get('/comment/:productId', function (req, res, next) {
     );
 });
 
-// Get all comments for a user 
+// Get all comments for a user
 router.get('/comments/:userId', function (req, res, next) {
     const userId = req.params.userId;
     db.query(
@@ -119,6 +118,25 @@ router.get('/comments/:userId', function (req, res, next) {
             });
             else res.send({
                 data: "Comments Not Found",
+                success: false
+            });
+        }
+    );
+});
+
+// Get all comments for a user
+router.get('/user/:userId', function (req, res, next) {
+    const userId = req.params.userId;
+    db.query(
+        `SELECT b.name FROM ACCOUNT a INNER JOIN COMMENT b ON a.accID = b.userID where b.userID = ${userId}`,
+        (err, doc) => {
+            if (err) throw err;
+            else if (doc.length) res.send({
+                data: doc,
+                success: true
+            });
+            else res.send({
+                data: "Username Not Found",
                 success: false
             });
         }
@@ -198,7 +216,7 @@ router.get("/offer/:sellerId", function (req, res, next) {
                             success: true
                         });
                         else res.send({
-                            data: "Comments Not Found",
+                            data: "Offers Not Found",
                             success: false
                         });
                     }
@@ -212,7 +230,7 @@ router.get("/offer/:sellerId", function (req, res, next) {
     );
 })
 
-// Add Categories 
+// Add Categories
 router.post('/category', function (req, res, next) {
     const category = req.body;
     db.query(
@@ -256,5 +274,75 @@ router.post('/review', function (req, res, next) {
     );
 });
 
+// Accept Offer TO DO
+router.post('/offer', function (req, res, next) {
+    const acceptOffer = req.body;
+    db.query(
+        'INSERT INTO Offer SET ? ', acceptOffer,
+        (err, rows) => {
+            if (err) throw err;
+            else if (rows) res.send({
+                success: true
+            });
+            else res.send({
+                data: "Offer Not Accepted",
+                success: false
+            });
+        }
+    );
+})
 
+// Admin get num of prod sold per seller
+router.get("/admin/getNumOfProdSold", function (req, res, next) {
+  db.query(
+      `SELECT accID, name, COUNT(productID) AS countProducts FROM ACCOUNT a, Product p WHERE STATUS = "sold" AND a.accID = p.sellerID GROUP by accID ORDER BY COUNT(productID) DESC`,
+      (err, doc) => {
+          if (err) throw err;
+          else if (doc.length) res.send({
+              data: doc,
+              success: true
+          });
+          else res.send({
+              data: "Bookmarks Not Found",
+              success: false
+          });
+      }
+  );
+});
+
+// List the categories with highest transaction value in descending order
+router.get("/admin/getNumOfProdSold", function (req, res, next) {
+  db.query(
+      `SELECT categoryName, SUM(unitPrice) AS sumUnitPrice FROM Categories c, Product p WHERE c.categoryID = p.categoryID AND status = "sold" GROUP BY categoryName ORDER BY SUM(unitPrice) DESC`,
+      (err, doc) => {
+          if (err) throw err;
+          else if (doc.length) res.send({
+              data: doc,
+              success: true
+          });
+          else res.send({
+              data: "Bookmarks Not Found",
+              success: false
+          });
+      }
+  );
+});
+
+// Check offer range of products in categories
+router.get("/admin/getRangeOfProds", function (req, res, next) {
+  db.query(
+      `SELECT categoryName, MIN(priceOffered) AS minPriceOffered, MAX(priceOffered) AS maxPriceOffered FROM Categories c, Offer o, Product p WHERE o.productID = p.productID GROUP BY categoryName`,
+      (err, doc) => {
+          if (err) throw err;
+          else if (doc.length) res.send({
+              data: doc,
+              success: true
+          });
+          else res.send({
+              data: "Bookmarks Not Found",
+              success: false
+          });
+      }
+  );
+});
 module.exports = router;

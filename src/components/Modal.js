@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
         width: 400,
+        padding:5,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
     },
@@ -35,7 +36,7 @@ export default function SimpleModal({ modal, openModal, closeModal }) {
 
     useEffect(() => {
         setOpen(openModal)
-    },[openModal])
+    }, [openModal])
 
     const body = (
         <div style={modalStyle} className={classes.paper}>

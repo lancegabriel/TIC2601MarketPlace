@@ -8,6 +8,7 @@ const unauth = require('./routes/unauth');
 const auth = require("./routes/auth");
 const db = require("./config/db.config");
 const passport = require("./config/passport.config");
+const bodyParser = require('body-parser');
 const app = express();
 
 // view engine setup
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use('/', unauth);
 app.use('/', passport.authenticate('jwt', { session: false }), auth);
 

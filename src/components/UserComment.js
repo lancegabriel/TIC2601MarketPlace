@@ -20,10 +20,6 @@ const Comment = ({ comment }) => {
                         <p>{moment(comment?.commentTime).format("MMMM Do YYYY, h:mm:ss a")}</p>
                         <p>{comment?.COMMENT}</p>
                     </Grid>
-                    <Grid item xs={2} style={{ marginLeft: 175 }}>
-                        <Button size="small" variant="contained" style={{ backgroundColor: "black", color: "white" }}>Reply</Button>
-                        <Button size="small" variant="contained" style={{ backgroundColor: "black", color: "white" }}>Go To Listing</Button>
-                    </Grid>
                 </Grid>
             </div>
         </>

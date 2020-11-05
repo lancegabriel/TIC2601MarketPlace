@@ -9,6 +9,9 @@ import userBookmarks from "./userBookmarks";
 import userOffers from "./userOffers";
 import productDetails from "./productDetails";
 import productComments from "./productComments";
+import comments from "./comments";
+import bookmarks from "./bookmarks";
+import offers from "./offers";
 import signout from "./signout";
 
 
@@ -23,5 +26,8 @@ export default combineReducers({
     userOffers,
     productDetails,
     productComments,
+    comments,
+    offers,
+    bookmarks,
     signout
  })
