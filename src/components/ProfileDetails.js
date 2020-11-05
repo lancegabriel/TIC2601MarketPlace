@@ -3,8 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import ListingInsights from "./ListingInsights";
 import AdminListingInsights from "./AdminListingInsights";
 const ProfileDetails = ({ userInformations }) => {
-  console.log(userInformations)
-  if (userInformations?.data[0]?.isAdmin == 1) {
+  console.log(userInformations.data[0])
+  if (userInformations.data[0].isAdmin == 0) {
     return (
         <div id="profileDetails">
             <Grid container>

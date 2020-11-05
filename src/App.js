@@ -16,7 +16,9 @@ import CreateListing from "./views/CreateListing";
 import MainLoggedIn from "./views/MainLoggedIn";
 import history from "./history";
 import { PersistGate } from 'redux-persist/integration/react'
-import Admin from "./views/Admin";
+import AdminPricePerCat from "./views/AdminPricePerCat";
+import AdminNoSoldPerSeller from "./views/AdminNoSoldPerSeller";
+import AdminHighTrans from "./views/AdminHighTrans";
 
 function App() {
   return (
@@ -51,8 +53,14 @@ function App() {
             <Route exact path="/mainloggedin">
               <MainLoggedIn />
             </Route>
-            <Route path="/admin">
-              <Admin />
+            <Route exact path="/adminPricePerCat">
+              <AdminPricePerCat />
+            </Route>
+            <Route exact path="/adminNoSoldPerSeller">
+              <AdminNoSoldPerSeller />
+            </Route>
+            <Route exact path="/adminHighTrans">
+              <AdminHighTrans />
             </Route>
           </Switch>
         </Router>

@@ -130,7 +130,7 @@ router.get('/category', function (req, res, next) {
 
 
 // Admin get num of prod sold per seller
-router.get("/admin/getNumOfProdSold", function (req, res, next) {
+router.get("/getNumOfProdSold", function (req, res, next) {
   db.query(
       `SELECT accID, name, COUNT(productID) AS countProducts FROM ACCOUNT a, Product p WHERE STATUS = "sold" AND a.accID = p.sellerID GROUP by accID ORDER BY COUNT(productID) DESC`,
       (err, doc) => {
@@ -140,7 +140,7 @@ router.get("/admin/getNumOfProdSold", function (req, res, next) {
               success: true
           });
           else res.send({
-              data: "Bookmarks Not Found",
+              data: "Not found",
               success: false
           });
       }
@@ -148,7 +148,7 @@ router.get("/admin/getNumOfProdSold", function (req, res, next) {
 });
 
 // List the categories with highest transaction value in descending order
-router.get("/admin/getNumOfProdSold", function (req, res, next) {
+router.get("/getHighestTrans", function (req, res, next) {
   db.query(
       `SELECT categoryName, SUM(unitPrice) AS sumUnitPrice FROM Categories c, Product p WHERE c.categoryID = p.categoryID AND status = "sold" GROUP BY categoryName ORDER BY SUM(unitPrice) DESC`,
       (err, doc) => {
@@ -158,7 +158,7 @@ router.get("/admin/getNumOfProdSold", function (req, res, next) {
               success: true
           });
           else res.send({
-              data: "Bookmarks Not Found",
+              data: "Not Found",
               success: false
           });
       }
@@ -166,7 +166,7 @@ router.get("/admin/getNumOfProdSold", function (req, res, next) {
 });
 
 // Check offer range of products in categories
-router.get("/admin/getRangeOfProds", function (req, res, next) {
+router.get("/getRangeOfProds", function (req, res, next) {
   db.query(
       `SELECT categoryName, MIN(priceOffered) AS minPriceOffered, MAX(priceOffered) AS maxPriceOffered FROM Categories c, Offer o, Product p WHERE o.productID = p.productID GROUP BY categoryName`,
       (err, doc) => {
@@ -176,7 +176,7 @@ router.get("/admin/getRangeOfProds", function (req, res, next) {
               success: true
           });
           else res.send({
-              data: "Bookmarks Not Found",
+              data: "Not Found",
               success: false
           });
       }

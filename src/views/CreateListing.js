@@ -12,8 +12,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Input from '@material-ui/core/Input';
 import Button from "@material-ui/core/Button";
-import Dropzone from 'react-dropzone'
-import Filter from "../components/Filter";
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { setCreateProducts } from "../actions/createProducts";
@@ -27,7 +25,6 @@ const CreateListing = ({logins, getCategories, categories, setCreateProducts, pr
       const [open, setOpen] = useState(false);
       const history = useHistory();
       const anchorRef = useRef(null);
-      let base64 = null;
       const handleToggle = () => {
           setOpen((prevOpen) => !prevOpen);
       };

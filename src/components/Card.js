@@ -19,11 +19,9 @@ const useStyles = makeStyles({
     },
 });
 
-
 function CardComponent({ product, bookmark, dontShowDetails }) {
     const history = useHistory();
     const classes = useStyles();
-    console.log(product.image)
     return (
         <Card className={classes.root}>
             <CardActionArea>

@@ -13,7 +13,9 @@ import comments from "./comments";
 import bookmarks from "./bookmarks";
 import offers from "./offers";
 import signout from "./signout";
-
+import offerRange from "./Admin"
+import adminHighTrans from "./AdminHighTrans"
+import adminNoSoldPerSeller from "./AdminNoSoldPerSeller"
 
 export default combineReducers({
     products,
@@ -29,5 +31,8 @@ export default combineReducers({
     comments,
     offers,
     bookmarks,
-    signout
+    signout,
+    offerRange,
+    adminHighTrans,
+    adminNoSoldPerSeller
  })

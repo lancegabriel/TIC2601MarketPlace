@@ -71,6 +71,7 @@ const ProductDetails = ({ logins, postUserOffers, postUserComments, postUserBook
             <h3>$</h3>
             <input id="offered" placeholder="00.00"></input>
             <br/>
+            <br/>
             <Button size="small" variant="contained" style={{ backgroundColor: "black", color: "white" }} onClick={() => {
                 postUserOffers(logins.data.token, {
                     "buyerID": logins.data.data[0].accID,
