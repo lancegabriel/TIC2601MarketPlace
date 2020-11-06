@@ -161,6 +161,24 @@ router.post('/bookmark', function (req, res, next) {
     );
 })
 
+// Unbookmark
+router.post('/bookmark', function (req, res, next) {
+    const bookmark = req.body;
+    db.query(
+        `DELETE FROM BOOKMARK WHERE accID = ${bookmark.accID} AND productID = ${bookmark.productID}`, bookmark,
+        (err, rows) => {
+            if (err) throw err;
+            else if (rows) res.send({
+                success: true
+            });
+            else res.send({
+                data: "Bookmark not deleted",
+                success: false
+            });
+        }
+    );
+})
+
 // Get Bookmark
 router.get('/bookmark/:accID', function (req, res, next) {
     const accID = req.params.accID;
@@ -198,7 +216,78 @@ router.post('/offer', function (req, res, next) {
     );
 })
 
-// Get all Offer
+// Get all accepted offers by buyerID
+router.get("/offersAcceptedBuyer/:sellerId", function (req, res, next) {
+    const sellerId = req.params.sellerId;
+    console.log(req.params)
+    db.query(
+        `SELECT * FROM Offer o INNER JOIN Product p ON o.productID = p.productID where isAccepted = 1 AND (o.buyerID = '${sellerId}' OR p.sellerID = '${sellerId}')`,
+        (err, rows) => {
+            if (err) throw err;
+            else if (rows) res.send({
+                data: rows,
+                success: true
+            });
+            else res.send({
+                data: "Category Not Set",
+                success: false
+            });
+        }
+    );
+})
+
+// Get all Offers that buyer accepts
+router.get("/offerAcceptedSeller/:sellerId", function (req, res, next) {
+    const sellerId = req.params.sellerId;
+    db.query(
+        `SELECT productId FROM Product where sellerId = '${sellerId}'`,
+        (err, doc) => {
+            if (err) throw err;
+            else if (doc.length) {
+                const ids = doc.map((value) => value.productId);
+                db.query(
+                    `SELECT * FROM Offer where isAccepted = 1 AND productId IN (${ids})`,
+                    (err, doc) => {
+                        if (err) throw err;
+                        else if (doc.length) res.send({
+                            data: doc,
+                            success: true
+                        });
+                        else res.send({
+                            data: "Offers Not Found",
+                            success: false
+                        });
+                    }
+                );
+            }
+            else res.send({
+                data: "Products Not Found",
+                success: false
+            });
+        }
+    );
+})
+
+// Get all given offers which are not accepted
+router.get("/offersGiven/:sellerId", function (req, res, next) {
+    const sellerId = req.params.sellerId;
+    db.query(
+        `SELECT * FROM Offer where isAccepted = 0 AND buyerID = '${sellerId}'`,
+        (err, rows) => {
+            if (err) throw err;
+            else if (rows) res.send({
+                data: rows,
+                success: true
+            });
+            else res.send({
+                data: "Category Not Set",
+                success: false
+            });
+        }
+    );
+})
+
+// Get all Offers received
 router.get("/offer/:sellerId", function (req, res, next) {
     const sellerId = req.params.sellerId;
     db.query(
@@ -208,7 +297,7 @@ router.get("/offer/:sellerId", function (req, res, next) {
             else if (doc.length) {
                 const ids = doc.map((value) => value.productId);
                 db.query(
-                    `SELECT * FROM Offer where productId IN (${ids})`,
+                    `SELECT * FROM Offer where isAccepted = 0 AND productId IN (${ids})`,
                     (err, doc) => {
                         if (err) throw err;
                         else if (doc.length) res.send({
@@ -274,22 +363,45 @@ router.post('/review', function (req, res, next) {
     );
 });
 
-// Accept Offer TO DO
-router.post('/offer', function (req, res, next) {
+// Accept Offer
+router.post('/acceptOffer', function (req, res, next) {
     const acceptOffer = req.body;
-    db.query(
-        'INSERT INTO Offer SET ? ', acceptOffer,
-        (err, rows) => {
-            if (err) throw err;
-            else if (rows) res.send({
-                success: true
-            });
-            else res.send({
-                data: "Offer Not Accepted",
-                success: false
-            });
-        }
-    );
-})
+        db.query(`UPDATE Offer SET isAccepted = 1 WHERE productId = ${acceptOffer.productID}`,
+          (err, rows) => {
+              if (err) throw err;
+              else if (rows) {
+                  db.query(`UPDATE Product SET STATUS = 'sold' WHERE productId = ${acceptOffer.productID}`)
+                  res.send ({
+                    success: true
+                  })
+              } else {
+                res.send({
+                    data: "Something went wrong!",
+                    success: false
+                });
+              }
+          }
+        );
+});
+
+// Rescind Offer
+router.post('/rescindOffer', function (req, res, next) {
+    const acceptOffer = req.body;
+        db.query(`DELETE FROM Offer WHERE offerID = ${acceptOffer.offerID}`,
+          (err, rows) => {
+              if (err) throw err;
+              else if (rows) {
+                  res.send ({
+                    success: true
+                  })
+              } else {
+                res.send({
+                    data: "Something went wrong!",
+                    success: false
+                });
+              }
+          }
+        );
+});
 
 module.exports = router;

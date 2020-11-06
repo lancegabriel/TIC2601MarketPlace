@@ -1,34 +1,33 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch } from 'react-redux';
 import Header from "../components/Header";
-import Offer from "../components/UserOffer";
-import { getUserOffers } from "../actions/userOffers";
+import OfferGiven from "../components/UserOfferGiven";
+import { getGivenOffers } from "../actions/userOffers";
 
-const Offers = ({ logins, userOffers, userProducts }) => {
+const OffersGiven = ({ logins, givenOffers, products }) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getUserOffers(logins?.data.token, logins?.data.data[0]?.accID))
+        dispatch(getGivenOffers(logins?.data.token, logins?.data.data[0]?.accID))
     }, [logins, dispatch])
-    console.log(userProducts)
     return (
         <>
             <Header modal={() => { }} showButton={false} showUser={true} userInformations={logins?.data} />
             <div id="offers">
-                <h3 id="heading">This are all your received offers:</h3>
+                <h3 id="heading">This are all your given offer:</h3>
                 {
-                    Array.isArray(userProducts.data) ? userProducts.data.map((product, index) => {
+                    Array.isArray(products.data) ? products.data.map((product, index) => {
                         let productwithOffers = {
                             ...product,
                             offers: []
                         };
-                        Array.isArray(userOffers.data) && userOffers.data.filter((offer) => {
+                        Array.isArray(givenOffers.data) && givenOffers.data.filter((offer) => {
                            if (product.productID === offer.productID) {
                              productwithOffers.offers.push(offer);
                             }
                             return false
                           });
                         if (productwithOffers.offers.length > 0) {
-                            return <Offer key={index} login={logins} product={productwithOffers} />
+                            return <OfferGiven key={index} login={logins} product={productwithOffers} />
                         }
                     }) : <h3 id="heading">No Offers Found</h3>
                 }
@@ -39,8 +38,8 @@ const Offers = ({ logins, userOffers, userProducts }) => {
 
 const mapStateToProps = state => ({
     logins: state.logins,
-    userOffers: state.userOffers,
-    userProducts: state.userProducts
+    givenOffers: state.givenOffers,
+    products: state.products
 })
 
-export default connect(mapStateToProps, { getUserOffers })(Offers)
+export default connect(mapStateToProps, { getGivenOffers })(OffersGiven)

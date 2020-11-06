@@ -16,8 +16,6 @@ const ProfileDetails = ({ userInformations }) => {
                 <Grid item>
                     <div id="information">
                         <h3>{userInformations?.data[0]?.NAME}</h3>
-                        <strong>{userInformations?.data[0]?.accID}</strong>
-                        <br />
                         <strong>99% Positive Reviews (99/100)</strong>
                     </div>
                 </Grid>
@@ -29,9 +27,6 @@ const ProfileDetails = ({ userInformations }) => {
                             <br />
                             <br />
                             <strong>Gender: {userInformations?.data[0]?.gender}</strong>
-                            <br />
-                            <br />
-                            <strong>Birthday: {userInformations?.data[0]?.bdate}</strong>
                             <br />
                             <br />
                             <strong>Address: {userInformations?.data[0]?.addr}</strong>

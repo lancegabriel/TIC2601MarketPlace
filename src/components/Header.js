@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import { useDispatch, connect } from "react-redux";
 import { signout } from "../actions/signout";
 import { useHistory } from "react-router";
+import Model from "../components/stickman.png";
 
 const Header = ({ modal, showButton, showUser, userInformations, signout, showSearch }) => {
     const dispatch = useDispatch();
@@ -66,7 +67,7 @@ const Header = ({ modal, showButton, showUser, userInformations, signout, showSe
                     showUser && (
                         <div id="user" style={{float: 'right'}}>
                           <div id="background" onClick={handleToProfile}>
-                              <span></span>
+                                <span></span>
                               </div>
                             <span>
                                 {userInformations?.data[0]?.username}

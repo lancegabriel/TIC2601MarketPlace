@@ -7,14 +7,12 @@ import ProductImage from "./product.png";
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { useHistory } from "react-router";
-import { acceptUserOffer } from "../actions/offers";
 
-// Offer Received
-const Offer = ({ login, product, acceptUserOffer }) => {
+// All Accepted Offer by buyer
+const AcceptedOfferBuyer = ({ login, product }) => {
     const history = useHistory();
     const [counter, setCounter] = useState(0);
     const [display, setDisplay] = useState("block");
-
     const handleChange = () => {
         if (counter === 0) {
             setDisplay("none");
@@ -28,14 +26,7 @@ const Offer = ({ login, product, acceptUserOffer }) => {
     const handleGoToListing = () => {
       history.push("/details", {product})
     }
-
-    const handleAccept = () => {
-      acceptUserOffer(login.data.token,{
-          "productID": product.productID
-        });
-          alert("Offer Accepted! Please contact the buyer.");
-    }
-
+    console.log(product.offers)
     return (
         <>
             <br />
@@ -66,8 +57,8 @@ const Offer = ({ login, product, acceptUserOffer }) => {
                                     <h2>${offer?.priceOffered}</h2>
                                 </Grid>
                                 <Grid item xs={2} style={{ marginLeft: 175 }}>
-                                    <Button size="small" variant="contained" onClick={handleAccept} style={{ backgroundColor: "black", color: "white" }}>Accept</Button>
-                                    <Button size="small" variant="contained" onClick={handleGoToListing}  style={{ backgroundColor: "black", color: "white" }}>Go To Listing</Button>
+                                    <Button size="small" variant="contained" style={{ backgroundColor: "black", color: "white" }}>Contact Seller</Button>
+                                    <Button size="small" variant="contained" onClick={handleGoToListing} style={{ backgroundColor: "black", color: "white" }}>Go To Listing</Button>
                                 </Grid>
                             </Grid>
                         </div>)
@@ -78,7 +69,5 @@ const Offer = ({ login, product, acceptUserOffer }) => {
     )
 }
 
-const mapStateToProps = state => ({
-})
 
-export default connect(mapStateToProps, { acceptUserOffer })(Offer)
+export default AcceptedOfferBuyer

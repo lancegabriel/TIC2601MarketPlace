@@ -19,6 +19,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 import AdminPricePerCat from "./views/AdminPricePerCat";
 import AdminNoSoldPerSeller from "./views/AdminNoSoldPerSeller";
 import AdminHighTrans from "./views/AdminHighTrans";
+import OffersGiven from "./views/OffersGiven";
+import OfferAcceptedBuyers from "./views/OfferAcceptedBuyer"
 
 function App() {
   return (
@@ -42,7 +44,7 @@ function App() {
               <Offers />
             </Route>
             <Route exact path="/offersGiven">
-              <Offers />
+              <OffersGiven />
             </Route>
             <Route exact path="/details">
               <ProductDetails />
@@ -61,6 +63,9 @@ function App() {
             </Route>
             <Route exact path="/adminHighTrans">
               <AdminHighTrans />
+            </Route>
+            <Route exact path="/offerAcceptedBuyer">
+              <OfferAcceptedBuyers />
             </Route>
           </Switch>
         </Router>

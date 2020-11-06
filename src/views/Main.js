@@ -73,6 +73,11 @@ const Main = ({ getProducts, products, setLogin, setSignup, logins, signout, sig
         }
         else {
             alert("User Account Created");
+            const body = {
+              username: signupUsername,
+              password: signupPassword
+            }
+            setLogin(body)
         }
     }
 

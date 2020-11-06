@@ -1,4 +1,4 @@
-import { GET_USER_OFFERS, GET_USER_OFFERS_ERROR } from '../actions/types'
+import { GET_USER_OFFERS, GET_USER_OFFERS_ERROR, GET_GIVEN_OFFERS, GET_GIVEN_OFFERS_ERROR } from '../actions/types'
 
 const initialState ={
     loading: true,

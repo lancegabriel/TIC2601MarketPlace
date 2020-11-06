@@ -92,11 +92,11 @@ const ProductDetails = ({ logins, postUserOffers, postUserComments, postUserBook
                 <span id="backToListing" style={{ fontSize: 15, marginLeft: 30 }} onClick={() => history.push("/")}>Back To Listing Page</span>
                 <br />
                 <div id="details">
-                  <Grid container>
-                      <Grid item xs={6}>
-                          <img src={productDetails.data[0].image} alt="Product" width="70%" height="100%" />
+                  <Grid container style={{padding: 10}}>
+                      <Grid item xs={8}>
+                          <img src={productDetails.data[0].image} alt="Product" width="800px" height="650px" />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={4}>
                           <div id="right">
                               <Grid container>
                                   <Grid item xs={6}>
@@ -104,26 +104,28 @@ const ProductDetails = ({ logins, postUserOffers, postUserComments, postUserBook
                                   </Grid>
                                   <Grid item xs={6}>
                                       <Grid id="sellerInfo" container>
-                                      <Grid item xs={2}>
-                                          <div id="logo"></div>
-                                      </Grid>
-                                          <Grid item xs={4}>
-                                              <p><b>Seller Information:</b></p>
-                                              <p>{productDetails.data[0].sellerID}</p>
-                                              <p>95% Positive Review</p>
+                                          <Grid item xs={6}>
+                                            <br/>
+                                              <span  style={{float: 'right', paddingRight: 15}}><b>@{productDetails.data[0].sellerID}</b></span><br/>
+                                                <b>95%</b> Positive Review
+                                          </Grid>
+                                          <Grid item xs={3}>
+                                              <div id="logo"></div>
                                           </Grid>
 
                                       </Grid>
                                   </Grid>
                                   <Grid item xs={6}>
                                       <Grid id="productInfo" container>
-                                          <Grid item xs={11}>
-                                              <h5>{productDetails.data[0].ProductName}</h5>
+                                          <Grid item xs={10}>
+                                            <h5>{productDetails.data[0].ProductName}</h5>
+                                            <u><b>Category:</b> &nbsp; <b>{productDetails.data[0].categoryID}</b></u>
+                                            <p style={{fontSize:20}}>{productDetails.data[0].productDescription}</p>
+                                          </Grid>
+                                          <Grid onClick={postBookmark} item xs={2}>
+                                            <Bookmarks />
                                           </Grid>
                                       </Grid>
-                                  </Grid>
-                                  <Grid item xs={12}>
-                                  <b>Category:</b> <p>{productDetails.data[0].categoryID}</p>
                                   </Grid>
                                   <Modal modal={
                                       modalComment
@@ -138,20 +140,17 @@ const ProductDetails = ({ logins, postUserOffers, postUserComments, postUserBook
                                       closeModal={handleClose}
                                   />
                                   <Grid>
-                                  <b>Product Details:</b>
-                                  <p>{productDetails.data[0].productDescription}</p>
                                   </Grid>
+
                                   <Grid item xs={12}>
                                       <Grid container>
-                                          <Grid item xs={2}>
+                                          <Grid item xs={3}>
                                             <Button size="small" variant="contained" style={{ backgroundColor: "black", color: "white" }} onClick={handleComment}>Post A Comment</Button>
                                           </Grid>
-                                          <Grid item xs={2}>
+                                          <Grid item xs={3}>
                                                <Button size="small" variant="contained" style={{ backgroundColor: "black", color: "white" }} onClick={handleOffer}>Make An Offer</Button>
                                           </Grid>
-                                          <Grid onClick={postBookmark} item xs={1}>
-                                            <Bookmarks />
-                                          </Grid>
+
                                       </Grid>
                                   </Grid>
                               </Grid>

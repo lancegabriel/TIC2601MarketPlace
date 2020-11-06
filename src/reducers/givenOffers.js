@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCTS_ERROR } from '../actions/types'
+import { GET_GIVEN_OFFERS, GET_GIVEN_OFFERS_ERROR } from '../actions/types'
 
 const initialState ={
     loading: true,
@@ -8,13 +8,13 @@ const initialState ={
 export default function(state = initialState, action){
 
     switch(action.type){
-        case GET_PRODUCTS:
+        case GET_GIVEN_OFFERS:
             return {
                 ...state,
                 loading: false,
                 data: action.payload
             }
-        case GET_PRODUCTS_ERROR:
+        case GET_GIVEN_OFFERS_ERROR:
             return {
                 ...state,
                 loading: false,

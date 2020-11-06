@@ -3,10 +3,9 @@ import Grid from '@material-ui/core/Grid';
 import { useHistory } from "react-router";
 
 const ListingInsightsAdmin = () => {
-
     const history = useHistory();
     return (
-        <div id="listingInsightsAdmin">
+        <div id="listingInsights">
             <br />
             <br />
             <h5>ADMIN LISTING INSIGHTS:</h5>
@@ -18,7 +17,7 @@ const ListingInsightsAdmin = () => {
                     <span>Highest Transaction Category</span>
                 </Grid>
                 <Grid onClick={() => history.push("/adminPricePerCat")} item xs={5} style={{ backgroundColor: "lightgray", marginRight: 190, marginBottom: 30, padding: 50, textAlign: "center" }}>
-                    <span>Offer range</span>
+                    <span>Price Range for each Category</span>
                 </Grid>
             </Grid>
         </div>

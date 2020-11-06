@@ -95,7 +95,25 @@ router.post('/signup', function (req, res, next) {
 // Get all products
 router.get('/product', function (req, res, next) {
   db.query(
-    'SELECT * from Product ORDER BY productID DESC ',
+    `SELECT * from Product WHERE STATUS = 'available' ORDER BY productID DESC`,
+    (err, doc) => {
+      if (err) throw err;
+      else if (doc.length) res.send({
+        data: doc,
+        success: true
+      });
+      else res.send({
+        data: "Products Not Found",
+        success: false
+      });
+    }
+  );
+});
+
+// Get all products regardless of status
+router.get('/allproduct', function (req, res, next) {
+  db.query(
+    `SELECT * from Product ORDER BY productID DESC`,
     (err, doc) => {
       if (err) throw err;
       else if (doc.length) res.send({
@@ -168,7 +186,7 @@ router.get("/getHighestTrans", function (req, res, next) {
 // Check offer range of products in categories
 router.get("/getRangeOfProds", function (req, res, next) {
   db.query(
-      `SELECT categoryName, MIN(priceOffered) AS minPriceOffered, MAX(priceOffered) AS maxPriceOffered FROM Categories c, Offer o, Product p WHERE o.productID = p.productID GROUP BY categoryName`,
+      `SELECT categoryName, MIN(unitPrice) AS minPriceOffered, MAX(unitPrice) AS maxPriceOffered FROM Categories c, Product p WHERE c.categoryID = p.categoryID GROUP BY categoryName`,
       (err, doc) => {
           if (err) throw err;
           else if (doc.length) res.send({

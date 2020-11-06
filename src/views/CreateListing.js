@@ -139,6 +139,7 @@ const CreateListing = ({logins, getCategories, categories, setCreateProducts, pr
                           "image": file,
                           "unitPrice": document.getElementById("productAmt").value,
                           "categoryID": value,
+                          "STATUS": "available",
                           "sellerID": logins.data.data[0].accID
                         });
                         console.log()

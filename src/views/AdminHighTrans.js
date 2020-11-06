@@ -43,8 +43,8 @@ return (
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Account ID</TableCell>
-            <TableCell align="right">Name</TableCell>
+            <TableCell>Categories</TableCell>
+            <TableCell align="right">Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -53,7 +53,7 @@ return (
               <TableCell component="th" scope="row">
                 {row.categoryName}
               </TableCell>
-              <TableCell align="right">{row.sumUnitPrice}</TableCell>
+              <TableCell align="right">${row.sumUnitPrice}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -65,7 +65,7 @@ return (
   }
 
 const mapStateToProps = state => ({
-    adminNoSoldPerSeller: state.adminNoSoldPerSeller,
+    adminHighTrans: state.adminHighTrans,
     logins: state.logins
 })
 

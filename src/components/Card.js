@@ -30,24 +30,22 @@ function CardComponent({ product, bookmark, dontShowDetails }) {
                     image={product.image ? product.image : ProductImage}
                     title="Product"
                 />
-                <CardContent>
+                <CardContent style={{height: "70px"}}>
                     <span style={{ fontSize: 15 }}>
                         {product?.ProductName}
                         <span style={{ float: "right" }}>${product?.unitPrice}</span>
                     </span>
                     <br />
                     <br />
-                    <span style={{ fontSize: 13 }}>
+                    <div style={{fontSize: 13, overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitBoxOrient: 'vertical', WebkitLineClamp: 3, maxWidth: '100%' }}>
                         {product?.productDescription}
-                    </span>
+                    </div>
                 </CardContent>
             </CardActionArea>
             <CardActions>
                 {
                     !dontShowDetails && <span style={{ fontSize: 10, marginLeft: 10 }} onClick={() => {
-                        history.push("/details", {
-                            product
-                        })
+                        history.push("/details", {product})
                     }}>
                         View More >
                     </span>

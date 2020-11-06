@@ -16,9 +16,13 @@ import signout from "./signout";
 import offerRange from "./Admin"
 import adminHighTrans from "./AdminHighTrans"
 import adminNoSoldPerSeller from "./AdminNoSoldPerSeller"
+import givenOffers from "./givenOffers";
+import acceptedOfferBuyer from "./AcceptedOfferBuyer"
+import allProducts from "./productsAll"
 
 export default combineReducers({
     products,
+    allProducts,
     categories,
     logins,
     signups,
@@ -34,5 +38,7 @@ export default combineReducers({
     signout,
     offerRange,
     adminHighTrans,
-    adminNoSoldPerSeller
+    adminNoSoldPerSeller,
+    givenOffers,
+    acceptedOfferBuyer
  })
